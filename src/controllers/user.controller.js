@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const bcrypt = require('bcryptjs');
 const userModel = require('../models/user.model');
 const postModel = require("../models/post.model")
@@ -18,30 +17,10 @@ module.exports.registerUserController = async(req, res)=>{
         email,
         profileImage,
         password: hashPassword,
-=======
-const bcryptjs = require("bcryptjs");
-const jwt  = require("jsonwebtoken");
-const userModel = require("../models/user.model");
-
-module.exports.registerViewController = (req, res)=>{
-    res.render("register")
-}
-
-module.exports.registerUserController = async (req, res)=>{
-    console.log(req.body)
-    const {userName , email ,profileImage, password} = req.body;
-    const hashPassword = bcryptjs.hashSync(password , 10);
-    const user = await userModel.create({
-        userName,
-        email, 
-        profileImage,
-        password : hashPassword
->>>>>>> 776266add89b0001f15b3816f795fb1cfb151576
     });
 
     const token = jwt.sign({
         id : user._id,
-<<<<<<< HEAD
         email:user.email
     },"user-auth-secret-node");
     
@@ -100,20 +79,4 @@ module.exports.feedViewController = async(req, res)=>{
         const posts = await postModel.find().populate("author");
         console.log(posts);
         res.render("feed",{posts})
-=======
-        email : user.email
-    } , "node-auth-secret-key")
-
-    res.cookie("token" , token);
-    res.status(201).json({
-        user,
-        token
-    });
-}
-
-module.exports.userProfileController= async (req , res)=>{
-    const users = await userModel.find();
-    console.log(users);
-    res.render("profile", {users})
->>>>>>> 776266add89b0001f15b3816f795fb1cfb151576
 }
